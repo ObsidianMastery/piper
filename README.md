@@ -1,6 +1,12 @@
 # piper
 node command line text processing used to capture content with Obsidian
 
+install by:
+
+```
+npm link
+```
+
 test with
 ```
 piper -t json https://twitter.com/jappleby/status/1541536474365149190
