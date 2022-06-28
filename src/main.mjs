@@ -1,23 +1,36 @@
 #!/usr/bin/env node
 
 import minimist from 'minimist'
-import parse from "./parsers/twitter.mjs";
+import twitter from "./parsers/twitter.mjs";
+import youtube from "./parsers/youtube.mjs";
+
+const TWITTER_URL = /(https:\/\/twitter.com\/)/;
+const YOUTBUE_URL = /(youtube.com|youtu.be)\//;
 
 var argv = minimist(process.argv.slice(2));
-const tweet = await parse(argv._);
+
+let data = {}
+
+if(YOUTBUE_URL.test(argv._)){
+  data = await youtube(argv._);
+}
+
+if (TWITTER_URL.test(argv._)) {
+  data = await twitter(argv._);
+}
 
 let out = ""
 if (argv.o == 'code'){
   out = '```'
 }
-if (argv.t == "html") {
-  out += tweet.html;
+if (argv.f == "html") {
+  out += data.html;
 }
-if (argv.t == "json") {
-  out = `${out}\n${JSON.stringify(tweet, null, 2)}`;
+if (!argv.f || argv.f == "json") {
+  out = `${out}\n${JSON.stringify(data, null, 2)}`;
 }
-if (!argv.t || argv.t == "parsed") {
-  out = `${out}\n${tweet.parsed}` ;
+if (argv.f == "text") {
+  out = `${out}\n${data.parsed}`;
 }
 if (argv.o == "code") {
   out += "\n```";

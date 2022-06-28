@@ -8,6 +8,6 @@ export async function oembed(url) {
 
 export default async function parse(url){
   const tweet = await oembed(url)
-  tweet['parsed'] = await parseHtmlContent(tweet.html);
+  tweet['text'] = await parseHtmlContent(tweet.html);
   return tweet
 }

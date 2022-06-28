@@ -9,7 +9,7 @@ npm link
 
 test with
 ```
-piper -t json https://twitter.com/jappleby/status/1541536474365149190
+piper -o code https://twitter.com/jappleby/status/1541536474365149190
 ```
 you should see
 
@@ -39,22 +39,24 @@ Currently only works for tweeter urls.
 
 You can try with this URL: https://twitter.com/jappleby/status/1541536474365149190
 
+or youtube: https://youtu.be/DZfh3JRlc44
+
 Copy this url so it's in the clipboard then invoke the shell command to see the result. You should have a note open in edit mode in obsidian.
 
 set the output of shell command for stdout as "current file: caret position" and stderr as ignore
 
 Some useful commands to try:
 
-output parsed tweet content
+output parsed text field tweet content
 ```
-piper {{clipboard}}
+piper -f text {{clipboard}}
 ```
 
 
-output the html with code guard around it:
+output the html field with code guard around it:
 
 ```
-piper -t html -o code {{clipboard}}
+piper -f html -o code {{clipboard}}
 ```
 
 output everything piper returns in json format with code guard around it
@@ -62,6 +64,6 @@ output everything piper returns in json format with code guard around it
 command for shell command:
 
 ```
-piper -t json -o code {{clipboard}}
+piper -o code {{clipboard}}
 ```
 
